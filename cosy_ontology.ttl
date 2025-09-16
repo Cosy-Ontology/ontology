@@ -1,0 +1,1377 @@
+@prefix : <http://purl.com/cosy#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cosy: <http://purl.com/cosy#> .
+@prefix gufo: <http://purl.org/nemo/gufo#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://purl.com/cosy#> .
+
+<http://purl.com/cosy> rdf:type owl:Ontology ;
+                        owl:imports <http://purl.org/creon/1.0.0> ,
+                                    <http://purl.org/disc-o/1.0.0> ,
+                                    <http://purl.org/nemo/gufo#/1.0.0> .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/nemo/gufo#categorizes
+gufo:categorizes rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/nemo/gufo#isDerivedFrom
+gufo:isDerivedFrom rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.com/cosy#bonding
+cosy:bonding rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://purl.org/disc-o#bonding> ;
+             rdfs:domain cosy:ObjectRole ;
+             rdfs:range cosy:ObjectRole ;
+             rdfs:label "bondingObjectRole"@en .
+
+
+###  http://purl.com/cosy#composition
+cosy:composition rdf:type owl:ObjectProperty ;
+                 rdfs:domain cosy:SystemType ;
+                 rdfs:range cosy:ComponentType ;
+                 rdfs:label "composition"@en .
+
+
+###  http://purl.com/cosy#concerns
+cosy:concerns rdf:type owl:ObjectProperty ;
+              rdfs:domain cosy:SystemSituation ;
+              rdfs:range cosy:System ;
+              rdfs:label "concerns"@en .
+
+
+###  http://purl.com/cosy#constitutesEnternalEntityParticipation
+cosy:constitutesEnternalEntityParticipation rdf:type owl:ObjectProperty ;
+                                            rdfs:subPropertyOf <http://purl.org/disc-o#constitutesEmergentEvent> ;
+                                            rdfs:domain cosy:ExternalEntityParticipationAtComponentLevel ;
+                                            rdfs:range cosy:ExternalEntityParticipationAtSystemLevel .
+
+
+###  http://purl.com/cosy#constitutesSystemEvent
+cosy:constitutesSystemEvent rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf <http://purl.org/disc-o#constitutesEmergentEvent> ;
+                            rdfs:domain cosy:ComponentEvent ;
+                            rdfs:range cosy:SystemEvent .
+
+
+###  http://purl.com/cosy#externalBonding
+cosy:externalBonding rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf cosy:externalBondingObjectType ;
+                     rdfs:domain cosy:SystemType ;
+                     rdfs:range cosy:ExternalEntityRole ;
+                     rdfs:label "externalBondingSystemType"@en .
+
+
+###  http://purl.com/cosy#externalBondingObjectType
+cosy:externalBondingObjectType rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf <http://purl.org/disc-o#bonding> ;
+                               rdfs:domain <http://purl.org/disc-o#ObjectType> ;
+                               rdfs:range cosy:ObjectRole ;
+                               rdfs:label "externalBonding" .
+
+
+###  http://purl.com/cosy#externalBonding_1
+cosy:externalBonding_1 rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf cosy:externalBonding_2 ;
+                       rdfs:domain cosy:ComponentRole ;
+                       rdfs:range cosy:ExternalEntityRole ;
+                       rdfs:label "externalBondingComponentRole"@en .
+
+
+###  http://purl.com/cosy#externalBonding_2
+cosy:externalBonding_2 rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf cosy:externalBondingObjectType ;
+                       rdfs:domain cosy:ComponentType ;
+                       rdfs:range cosy:ExternalEntityRole ;
+                       rdfs:label "externalBondingComponentType"@en .
+
+
+###  http://purl.com/cosy#interaction
+cosy:interaction rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf cosy:interaction_2 ;
+                 rdfs:domain cosy:ComponentRole ;
+                 rdfs:range cosy:FlowItemRole ;
+                 rdfs:label "componentInteraction"@en .
+
+
+###  http://purl.com/cosy#interaction_1
+cosy:interaction_1 rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf cosy:interaction_2 ;
+                   rdfs:domain cosy:SystemRole ;
+                   rdfs:range cosy:FlowItemRole ;
+                   rdfs:label "systemInteraction"@en .
+
+
+###  http://purl.com/cosy#interaction_2
+cosy:interaction_2 rdf:type owl:ObjectProperty ;
+                   rdfs:domain cosy:ObjectRole ;
+                   rdfs:range cosy:ObjectRole ;
+                   rdfs:label "interaction"@en .
+
+
+###  http://purl.com/cosy#interaction_3
+cosy:interaction_3 rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf cosy:interaction_2 ;
+                   rdfs:domain cosy:ExternalEntityRole ;
+                   rdfs:range cosy:FlowItemRole ;
+                   rdfs:label "externalEntityInteraction"@en .
+
+
+###  http://purl.com/cosy#internalBonding
+cosy:internalBonding rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf cosy:internalBonding_1 ;
+                     rdfs:domain cosy:ComponentRole ;
+                     rdfs:range cosy:ComponentRole ;
+                     rdfs:label "internalBonding"@en .
+
+
+###  http://purl.com/cosy#internalBonding_1
+cosy:internalBonding_1 rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf <http://purl.org/disc-o#bonding> ;
+                       rdfs:domain cosy:ComponentType ;
+                       rdfs:range cosy:ComponentType ;
+                       rdfs:label "internalBonding"@en .
+
+
+###  http://purl.com/cosy#isConnectedWith
+cosy:isConnectedWith rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf <http://purl.org/disc-o#interactsWith_1> ;
+                     rdfs:domain cosy:ConnectedObject ;
+                     rdfs:range cosy:ConnectedObject .
+
+
+###  http://purl.com/cosy#isContrastedWith
+cosy:isContrastedWith rdf:type owl:ObjectProperty ;
+                      rdfs:domain cosy:ConnectedObject ;
+                      rdfs:range cosy:ConnectedObject .
+
+
+###  http://purl.com/cosy#isExternallyConnectedWith
+cosy:isExternallyConnectedWith rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf cosy:isConnectedWith ;
+                               rdfs:domain cosy:Component ;
+                               rdfs:range cosy:ExternalEntity .
+
+
+###  http://purl.com/cosy#isExternallyConnectedWith_1
+cosy:isExternallyConnectedWith_1 rdf:type owl:ObjectProperty ;
+                                 rdfs:subPropertyOf cosy:isConnectedWith ;
+                                 rdfs:domain cosy:System ;
+                                 rdfs:range cosy:ExternalEntity .
+
+
+###  http://purl.com/cosy#isExternallyContrastedWith
+cosy:isExternallyContrastedWith rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf cosy:isContrastedWith ;
+                                rdfs:domain cosy:System ;
+                                rdfs:range cosy:ExternalEntity .
+
+
+###  http://purl.com/cosy#isExternallyContrastedWith_1
+cosy:isExternallyContrastedWith_1 rdf:type owl:ObjectProperty ;
+                                  rdfs:subPropertyOf cosy:isContrastedWith ;
+                                  rdfs:domain cosy:Component ;
+                                  rdfs:range cosy:ExternalEntity .
+
+
+###  http://purl.com/cosy#isInternallyConnectedWith
+cosy:isInternallyConnectedWith rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf cosy:isConnectedWith ;
+                               rdfs:domain cosy:Component ;
+                               rdfs:range cosy:Component .
+
+
+###  http://purl.com/cosy#isInternallyContrastedWith
+cosy:isInternallyContrastedWith rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf cosy:isContrastedWith ;
+                                rdfs:domain cosy:Component ;
+                                rdfs:range cosy:Component .
+
+
+###  http://purl.com/cosy#maintainsInteractionWith_1
+cosy:maintainsInteractionWith_1 rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf <http://purl.org/disc-o#interactsWith_1> ;
+                                rdfs:domain cosy:Component ;
+                                rdfs:range cosy:SystemFlowItem .
+
+
+###  http://purl.com/cosy#maintainsInteractionWith_3
+cosy:maintainsInteractionWith_3 rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf <http://purl.org/disc-o#interactsWith_1> ;
+                                rdfs:domain cosy:System ;
+                                rdfs:range cosy:SystemFlowItem .
+
+
+###  http://purl.com/cosy#maintainsInteractionWith_4
+cosy:maintainsInteractionWith_4 rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf <http://purl.org/disc-o#interactsWith_1> ;
+                                rdfs:domain cosy:ExternalEntity ;
+                                rdfs:range cosy:SystemFlowItem .
+
+
+###  http://purl.com/cosy#mediation
+cosy:mediation rdf:type owl:ObjectProperty ;
+               rdfs:domain cosy:RelatorType ;
+               rdfs:range cosy:ObjectRole ;
+               rdfs:label "mediation"@en .
+
+
+###  http://purl.com/cosy#nonBondingRelation
+cosy:nonBondingRelation rdf:type owl:ObjectProperty ;
+                        rdfs:domain cosy:ObjectRole ;
+                        rdfs:range cosy:ObjectRole ;
+                        rdfs:label "nonBondingRelation"@en .
+
+
+###  http://purl.com/cosy#specialization
+cosy:specialization rdf:type owl:ObjectProperty ;
+                    rdfs:label "specialization"@en .
+
+
+###  http://purl.com/cosy#standsInSystemSituation
+cosy:standsInSystemSituation rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf cosy:standsIn_5 ;
+                             rdfs:domain gufo:Object ;
+                             rdfs:range cosy:SystemSituation .
+
+
+###  http://purl.com/cosy#standsIn_3
+cosy:standsIn_3 rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf cosy:standsInSystemSituation ;
+                rdfs:domain cosy:Component ;
+                rdfs:range cosy:SystemSituation ;
+                rdfs:label "standsInSystemComposition"@en .
+
+
+###  http://purl.com/cosy#standsIn_5
+cosy:standsIn_5 rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf gufo:standsIn ;
+                rdfs:domain cosy:ConnectedObject ;
+                rdfs:range cosy:ConnectiveSituation ;
+                rdfs:label "standsInConnectiveSituation"@en .
+
+
+###  http://purl.com/cosy#standsIn_7
+cosy:standsIn_7 rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf cosy:standsInSystemSituation ;
+                rdfs:domain cosy:ExternalEntity ;
+                rdfs:range cosy:SystemSituation ;
+                rdfs:label "standsInSystemEnvironment"@en .
+
+
+###  http://purl.com/cosy#standsIn_8
+cosy:standsIn_8 rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf cosy:standsInSystemSituation ;
+                rdfs:domain cosy:SystemFlowItem ;
+                rdfs:range cosy:SystemSituation ;
+                rdfs:label "standsInSystemFlow"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.com/cosy#Component
+cosy:Component rdf:type owl:Class ;
+               rdfs:subClassOf cosy:ConnectedObject ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty [ owl:inverseOf gufo:inheresIn
+                                                ] ;
+                                 owl:someValuesFrom cosy:ComponentAspect
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty [ owl:inverseOf gufo:inheresIn
+                                                ] ;
+                                 owl:someValuesFrom cosy:ComponentDisposition
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty [ owl:inverseOf gufo:mediates
+                                                ] ;
+                                 owl:someValuesFrom cosy:ComponentConnectionRelator
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty [ owl:inverseOf gufo:mediates
+                                                ] ;
+                                 owl:someValuesFrom cosy:InternalConnectionRelator
+                               ] .
+
+
+###  http://purl.com/cosy#ComponentAspect
+cosy:ComponentAspect rdf:type owl:Class ;
+                     rdfs:subClassOf gufo:Aspect ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty gufo:inheresIn ;
+                                       owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass cosy:Component
+                                     ] .
+
+
+###  http://purl.com/cosy#ComponentConnectionRelator
+cosy:ComponentConnectionRelator rdf:type owl:Class ;
+                                rdfs:subClassOf cosy:ComponentAspect ,
+                                                cosy:ConnectionRelator ,
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty gufo:mediates ;
+                                                  owl:someValuesFrom cosy:Component
+                                                ] .
+
+
+###  http://purl.com/cosy#ComponentDisposition
+cosy:ComponentDisposition rdf:type owl:Class ;
+                          rdfs:subClassOf cosy:ComponentAspect ,
+                                          <http://purl.org/disc-o#Disposition> ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gufo:inheresIn ;
+                                            owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass cosy:Component
+                                          ] .
+
+
+###  http://purl.com/cosy#ComponentEvent
+cosy:ComponentEvent rdf:type owl:Class ;
+                    rdfs:subClassOf gufo:Event ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty [ owl:inverseOf gufo:inheresIn
+                                                     ] ;
+                                      owl:someValuesFrom cosy:ComponentAspect
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                     ] ;
+                                      owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass cosy:Component
+                                    ] .
+
+
+###  http://purl.com/cosy#ComponentParticipation
+cosy:ComponentParticipation rdf:type owl:Class ;
+                            rdfs:subClassOf cosy:ComponentEvent ,
+                                            gufo:Participation .
+
+
+###  http://purl.com/cosy#ComponentRole
+cosy:ComponentRole rdf:type owl:Class ;
+                   rdfs:subClassOf cosy:ComponentType ,
+                                   cosy:ObjectRole .
+
+
+###  http://purl.com/cosy#ComponentRoleKind
+cosy:ComponentRoleKind rdf:type owl:Class ;
+                       rdfs:subClassOf cosy:ComponentRole .
+
+
+###  http://purl.com/cosy#ComponentRoleMixin
+cosy:ComponentRoleMixin rdf:type owl:Class ;
+                        rdfs:subClassOf cosy:ComponentRole .
+
+
+###  http://purl.com/cosy#ComponentType
+cosy:ComponentType rdf:type owl:Class ;
+                   rdfs:subClassOf <http://purl.org/disc-o#ObjectType> .
+
+
+###  http://purl.com/cosy#ConnectedObject
+cosy:ConnectedObject rdf:type owl:Class ;
+                     rdfs:subClassOf <http://purl.org/disc-o#InteractiveObject> ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty [ owl:inverseOf gufo:mediates
+                                                      ] ;
+                                       owl:someValuesFrom cosy:ConnectionRelator
+                                     ] .
+
+
+###  http://purl.com/cosy#ConnectionRelator
+cosy:ConnectionRelator rdf:type owl:Class ;
+                       rdfs:subClassOf <http://purl.org/disc-o#InteractiveRelator> ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty gufo:mediates ;
+                                         owl:someValuesFrom cosy:ConnectedObject
+                                       ] .
+
+
+###  http://purl.com/cosy#ConnectiveSituation
+cosy:ConnectiveSituation rdf:type owl:Class ;
+                         rdfs:subClassOf <http://purl.org/disc-o#InteractiveSituation> .
+
+
+###  http://purl.com/cosy#ExternalComponentInteraction
+cosy:ExternalComponentInteraction rdf:type owl:Class ;
+                                  rdfs:subClassOf cosy:ComponentEvent ,
+                                                  <http://purl.org/disc-o#Interaction> .
+
+
+###  http://purl.com/cosy#ExternalConnectionRelator
+cosy:ExternalConnectionRelator rdf:type owl:Class ;
+                               rdfs:subClassOf cosy:ComponentConnectionRelator ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty gufo:mediates ;
+                                                 owl:someValuesFrom cosy:ExternalEntity
+                                               ] ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty gufo:mediates ;
+                                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                 owl:onClass cosy:Component
+                                               ] .
+
+
+###  http://purl.com/cosy#ExternalEntity
+cosy:ExternalEntity rdf:type owl:Class ;
+                    rdfs:subClassOf cosy:ConnectedObject ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty [ owl:inverseOf gufo:inheresIn
+                                                     ] ;
+                                      owl:someValuesFrom cosy:ExternalEntityDisposition
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty [ owl:inverseOf gufo:mediates
+                                                     ] ;
+                                      owl:someValuesFrom cosy:ExternalConnectionRelator
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty [ owl:inverseOf gufo:mediates
+                                                     ] ;
+                                      owl:someValuesFrom cosy:SystemConnectionRelator
+                                    ] .
+
+
+###  http://purl.com/cosy#ExternalEntityDisposition
+cosy:ExternalEntityDisposition rdf:type owl:Class ;
+                               rdfs:subClassOf gufo:IntrinsicMode ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty gufo:inheresIn ;
+                                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                 owl:onClass cosy:ExternalEntity
+                                               ] .
+
+
+###  http://purl.com/cosy#ExternalEntityParticipationAtComponentLevel
+cosy:ExternalEntityParticipationAtComponentLevel rdf:type owl:Class ;
+                                                 rdfs:subClassOf gufo:Participation ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                                                  ] ;
+                                                                   owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                   owl:onClass cosy:ExternalEntity
+                                                                 ] .
+
+
+###  http://purl.com/cosy#ExternalEntityParticipationAtSystemLevel
+cosy:ExternalEntityParticipationAtSystemLevel rdf:type owl:Class ;
+                                              rdfs:subClassOf gufo:Participation ,
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                                               ] ;
+                                                                owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                owl:onClass cosy:ExternalEntity
+                                                              ] .
+
+
+###  http://purl.com/cosy#ExternalEntityRole
+cosy:ExternalEntityRole rdf:type owl:Class ;
+                        rdfs:subClassOf cosy:ObjectRole .
+
+
+###  http://purl.com/cosy#FlowItemDisposition
+cosy:FlowItemDisposition rdf:type owl:Class ;
+                         rdfs:subClassOf <http://purl.org/disc-o#Disposition> ,
+                                         gufo:IntrinsicMode ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty gufo:inheresIn ;
+                                           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onClass cosy:SystemFlowItem
+                                         ] .
+
+
+###  http://purl.com/cosy#FlowItemRole
+cosy:FlowItemRole rdf:type owl:Class ;
+                  rdfs:subClassOf cosy:ObjectRole .
+
+
+###  http://purl.com/cosy#InternalComponentEvent
+cosy:InternalComponentEvent rdf:type owl:Class ;
+                            rdfs:subClassOf cosy:ComponentEvent ,
+                                            <http://purl.org/disc-o#InternalEvent> .
+
+
+###  http://purl.com/cosy#InternalComponentInteraction
+cosy:InternalComponentInteraction rdf:type owl:Class ;
+                                  rdfs:subClassOf cosy:ComponentEvent ,
+                                                  <http://purl.org/disc-o#Interaction> .
+
+
+###  http://purl.com/cosy#InternalConnectionRelator
+cosy:InternalConnectionRelator rdf:type owl:Class ;
+                               rdfs:subClassOf cosy:ComponentConnectionRelator ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty gufo:mediates ;
+                                                 owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                                 owl:onClass cosy:Component
+                                               ] .
+
+
+###  http://purl.com/cosy#InternalSystemEvent
+cosy:InternalSystemEvent rdf:type owl:Class ;
+                         rdfs:subClassOf cosy:SystemEvent ,
+                                         <http://purl.org/disc-o#InternalEvent> .
+
+
+###  http://purl.com/cosy#MomentType
+cosy:MomentType rdf:type owl:Class ;
+                rdfs:subClassOf gufo:EndurantType .
+
+
+###  http://purl.com/cosy#ObjectRole
+cosy:ObjectRole rdf:type owl:Class ;
+                rdfs:subClassOf <http://purl.org/disc-o#ObjectType> .
+
+
+###  http://purl.com/cosy#RelatorType
+cosy:RelatorType rdf:type owl:Class ;
+                 rdfs:subClassOf cosy:MomentType .
+
+
+###  http://purl.com/cosy#Subsystem
+cosy:Subsystem rdf:type owl:Class ;
+               rdfs:subClassOf cosy:Component ,
+                               cosy:System .
+
+
+###  http://purl.com/cosy#System
+cosy:System rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.com#CapableObject> ,
+                            cosy:ConnectedObject ,
+                            gufo:FunctionalComplex ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gufo:participatedIn ;
+                              owl:someValuesFrom cosy:SystemEvent
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty [ owl:inverseOf gufo:inheresIn
+                                             ] ;
+                              owl:someValuesFrom cosy:SystemAspect
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty [ owl:inverseOf gufo:inheresIn
+                                             ] ;
+                              owl:someValuesFrom cosy:SystemDisposition
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty [ owl:inverseOf gufo:mediates
+                                             ] ;
+                              owl:someValuesFrom cosy:SystemConnectionRelator
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                             ] ;
+                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onClass cosy:SystemChange
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gufo:participatedIn ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onClass cosy:SystemBehavior
+                            ] .
+
+
+###  http://purl.com/cosy#SystemAspect
+cosy:SystemAspect rdf:type owl:Class ;
+                  rdfs:subClassOf gufo:Aspect ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty gufo:inheresIn ;
+                                    owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onClass cosy:System
+                                  ] .
+
+
+###  http://purl.com/cosy#SystemBehavior
+cosy:SystemBehavior rdf:type owl:Class ;
+                    rdfs:subClassOf gufo:Event ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                     ] ;
+                                      owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass cosy:System
+                                    ] .
+
+
+###  http://purl.com/cosy#SystemCapability
+cosy:SystemCapability rdf:type owl:Class ;
+                      rdfs:subClassOf <http://example.com#Capability> ,
+                                      cosy:SystemDisposition .
+
+
+###  http://purl.com/cosy#SystemChange
+cosy:SystemChange rdf:type owl:Class ;
+                  rdfs:subClassOf gufo:Event ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty gufo:broughtAbout ;
+                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onClass cosy:SystemSituation
+                                  ] .
+
+
+###  http://purl.com/cosy#SystemComposition
+cosy:SystemComposition rdf:type owl:Class ;
+                       rdfs:subClassOf gufo:Situation .
+
+
+###  http://purl.com/cosy#SystemConnectionRelator
+cosy:SystemConnectionRelator rdf:type owl:Class ;
+                             rdfs:subClassOf cosy:ConnectionRelator ,
+                                             cosy:SystemAspect ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty gufo:mediates ;
+                                               owl:someValuesFrom cosy:ExternalEntity
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty gufo:mediates ;
+                                               owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                               owl:onClass cosy:System
+                                             ] .
+
+
+###  http://purl.com/cosy#SystemDisposition
+cosy:SystemDisposition rdf:type owl:Class ;
+                       rdfs:subClassOf cosy:SystemAspect ,
+                                       <http://purl.org/disc-o#Disposition> ,
+                                       <http://purl.org/disc-o#ResultantDisposition> ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty gufo:inheresIn ;
+                                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onClass cosy:System
+                                       ] .
+
+
+###  http://purl.com/cosy#SystemEmergentDisposition
+cosy:SystemEmergentDisposition rdf:type owl:Class ;
+                               rdfs:subClassOf cosy:SystemDisposition ,
+                                               <http://purl.org/disc-o#EmergentDisposition> .
+
+
+###  http://purl.com/cosy#SystemEnvironment
+cosy:SystemEnvironment rdf:type owl:Class ;
+                       rdfs:subClassOf gufo:Situation .
+
+
+###  http://purl.com/cosy#SystemEnvironmentEvent
+cosy:SystemEnvironmentEvent rdf:type owl:Class ;
+                            rdfs:subClassOf cosy:SystemEvent ,
+                                            <http://purl.org/disc-o#Interaction> ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                             ] ;
+                                              owl:someValuesFrom cosy:SystemInput
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                             ] ;
+                                              owl:someValuesFrom cosy:SystemOutput
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty [ owl:inverseOf gufo:wasCreatedIn
+                                                             ] ;
+                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onClass cosy:SystemOutput
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty [ owl:inverseOf gufo:wasTerminatedIn
+                                                             ] ;
+                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onClass cosy:SystemInput
+                                            ] .
+
+
+###  http://purl.com/cosy#SystemEvent
+cosy:SystemEvent rdf:type owl:Class ;
+                 rdfs:subClassOf gufo:Event ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty [ owl:inverseOf gufo:inheresIn
+                                                  ] ;
+                                   owl:someValuesFrom cosy:SystemAspect
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty [ owl:inverseOf gufo:contributedToTrigger
+                                                  ] ;
+                                   owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass cosy:SystemManifestationContext
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                  ] ;
+                                   owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass cosy:System
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gufo:broughtAbout ;
+                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass cosy:SystemOutcome
+                                 ] .
+
+
+###  http://purl.com/cosy#SystemFlowItem
+cosy:SystemFlowItem rdf:type owl:Class ;
+                    rdfs:subClassOf gufo:Object ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty [ owl:inverseOf gufo:inheresIn
+                                                     ] ;
+                                      owl:someValuesFrom cosy:FlowItemDisposition
+                                    ] .
+
+
+###  http://purl.com/cosy#SystemInput
+cosy:SystemInput rdf:type owl:Class ;
+                 rdfs:subClassOf cosy:SystemFlowItem ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gufo:participatedIn ;
+                                   owl:someValuesFrom cosy:SystemEnvironmentEvent
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gufo:wasTerminatedIn ;
+                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass cosy:SystemEnvironmentEvent
+                                 ] .
+
+
+###  http://purl.com/cosy#SystemManifestationContext
+cosy:SystemManifestationContext rdf:type owl:Class ;
+                                rdfs:subClassOf gufo:Situation ,
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty gufo:contributedToTrigger ;
+                                                  owl:someValuesFrom cosy:SystemEvent
+                                                ] .
+
+
+###  http://purl.com/cosy#SystemOutcome
+cosy:SystemOutcome rdf:type owl:Class ;
+                   rdfs:subClassOf gufo:Situation ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty [ owl:inverseOf gufo:broughtAbout
+                                                    ] ;
+                                     owl:someValuesFrom cosy:SystemEvent
+                                   ] .
+
+
+###  http://purl.com/cosy#SystemOutput
+cosy:SystemOutput rdf:type owl:Class ;
+                  rdfs:subClassOf cosy:SystemFlowItem ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty gufo:participatedIn ;
+                                    owl:someValuesFrom cosy:SystemEnvironmentEvent
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty gufo:wasCreatedIn ;
+                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onClass cosy:SystemEnvironmentEvent
+                                  ] .
+
+
+###  http://purl.com/cosy#SystemParticipation
+cosy:SystemParticipation rdf:type owl:Class ;
+                         rdfs:subClassOf cosy:SystemEvent ,
+                                         gufo:Participation .
+
+
+###  http://purl.com/cosy#SystemQuality
+cosy:SystemQuality rdf:type owl:Class ;
+                   rdfs:subClassOf cosy:SystemAspect ,
+                                   gufo:Quality .
+
+
+###  http://purl.com/cosy#SystemResultantDisposition
+cosy:SystemResultantDisposition rdf:type owl:Class ;
+                                rdfs:subClassOf cosy:SystemDisposition .
+
+
+###  http://purl.com/cosy#SystemRole
+cosy:SystemRole rdf:type owl:Class ;
+                rdfs:subClassOf cosy:ObjectRole ,
+                                cosy:SystemType .
+
+
+###  http://purl.com/cosy#SystemSituation
+cosy:SystemSituation rdf:type owl:Class ;
+                     rdfs:subClassOf cosy:ConnectiveSituation ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty [ owl:inverseOf gufo:broughtAbout
+                                                      ] ;
+                                       owl:someValuesFrom cosy:SystemChange
+                                     ] .
+
+
+###  http://purl.com/cosy#SystemStativeSituation
+cosy:SystemStativeSituation rdf:type owl:Class ;
+                            rdfs:subClassOf gufo:Situation .
+
+
+###  http://purl.com/cosy#SystemStructure
+cosy:SystemStructure rdf:type owl:Class ;
+                     rdfs:subClassOf gufo:Situation .
+
+
+###  http://purl.com/cosy#SystemType
+cosy:SystemType rdf:type owl:Class ;
+                rdfs:subClassOf <http://purl.org/disc-o#ObjectType> .
+
+
+###  http://purl.com/cosy#SystemVulnerability
+cosy:SystemVulnerability rdf:type owl:Class ;
+                         rdfs:subClassOf cosy:SystemDisposition .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://example.com#ObjectType
+<http://example.com#ObjectType> gufo:categorizes cosy:ConnectedObject .
+
+
+###  http://purl.com/cosy#Component
+cosy:Component rdf:type owl:NamedIndividual ,
+                        gufo:Mixin .
+
+
+###  http://purl.com/cosy#ComponentAspect
+cosy:ComponentAspect rdf:type owl:NamedIndividual ,
+                              gufo:Category .
+
+
+###  http://purl.com/cosy#ComponentConnectionRelator
+cosy:ComponentConnectionRelator rdf:type owl:NamedIndividual ,
+                                         gufo:Category .
+
+
+###  http://purl.com/cosy#ComponentDisposition
+cosy:ComponentDisposition rdf:type owl:NamedIndividual ,
+                                   gufo:Category .
+
+
+###  http://purl.com/cosy#ComponentEvent
+cosy:ComponentEvent rdf:type owl:NamedIndividual ,
+                             gufo:EventType .
+
+
+###  http://purl.com/cosy#ComponentParticipation
+cosy:ComponentParticipation rdf:type owl:NamedIndividual ,
+                                     gufo:EventType .
+
+
+###  http://purl.com/cosy#ComponentRole
+cosy:ComponentRole rdf:type owl:NamedIndividual ;
+                   gufo:categorizes cosy:Component .
+
+
+###  http://purl.com/cosy#ComponentRoleKind
+cosy:ComponentRoleKind rdf:type owl:NamedIndividual .
+
+
+###  http://purl.com/cosy#ComponentRoleMixin
+cosy:ComponentRoleMixin rdf:type owl:NamedIndividual .
+
+
+###  http://purl.com/cosy#ComponentType
+cosy:ComponentType rdf:type owl:NamedIndividual ;
+                   gufo:categorizes cosy:Component .
+
+
+###  http://purl.com/cosy#ConnectedObject
+cosy:ConnectedObject rdf:type owl:NamedIndividual ,
+                              gufo:Mixin .
+
+
+###  http://purl.com/cosy#ConnectionRelator
+cosy:ConnectionRelator rdf:type owl:NamedIndividual ,
+                                gufo:Category .
+
+
+###  http://purl.com/cosy#ConnectiveSituation
+cosy:ConnectiveSituation rdf:type owl:NamedIndividual ,
+                                  gufo:SituationType .
+
+
+###  http://purl.com/cosy#ExternalComponentInteraction
+cosy:ExternalComponentInteraction rdf:type owl:NamedIndividual ,
+                                           gufo:EventType .
+
+
+###  http://purl.com/cosy#ExternalConnectionRelator
+cosy:ExternalConnectionRelator rdf:type owl:NamedIndividual ,
+                                        gufo:Category .
+
+
+###  http://purl.com/cosy#ExternalEntity
+cosy:ExternalEntity rdf:type owl:NamedIndividual ,
+                             gufo:RoleMixin .
+
+
+###  http://purl.com/cosy#ExternalEntityDisposition
+cosy:ExternalEntityDisposition rdf:type owl:NamedIndividual ,
+                                        gufo:Category .
+
+
+###  http://purl.com/cosy#ExternalEntityParticipationAtComponentLevel
+cosy:ExternalEntityParticipationAtComponentLevel rdf:type owl:NamedIndividual ,
+                                                          gufo:EventType .
+
+
+###  http://purl.com/cosy#ExternalEntityParticipationAtSystemLevel
+cosy:ExternalEntityParticipationAtSystemLevel rdf:type owl:NamedIndividual ,
+                                                       gufo:EventType .
+
+
+###  http://purl.com/cosy#ExternalEntityRole
+cosy:ExternalEntityRole rdf:type owl:NamedIndividual ;
+                        gufo:categorizes cosy:ExternalEntity .
+
+
+###  http://purl.com/cosy#FlowItemDisposition
+cosy:FlowItemDisposition rdf:type owl:NamedIndividual ,
+                                  gufo:Category .
+
+
+###  http://purl.com/cosy#FlowItemRole
+cosy:FlowItemRole rdf:type owl:NamedIndividual ;
+                  gufo:categorizes cosy:SystemFlowItem .
+
+
+###  http://purl.com/cosy#InternalComponentEvent
+cosy:InternalComponentEvent rdf:type owl:NamedIndividual ,
+                                     gufo:EventType .
+
+
+###  http://purl.com/cosy#InternalComponentInteraction
+cosy:InternalComponentInteraction rdf:type owl:NamedIndividual ,
+                                           gufo:EventType .
+
+
+###  http://purl.com/cosy#InternalConnectionRelator
+cosy:InternalConnectionRelator rdf:type owl:NamedIndividual ,
+                                        gufo:Category .
+
+
+###  http://purl.com/cosy#InternalSystemEvent
+cosy:InternalSystemEvent rdf:type owl:NamedIndividual ,
+                                  gufo:EventType .
+
+
+###  http://purl.com/cosy#MomentType
+cosy:MomentType rdf:type owl:NamedIndividual .
+
+
+###  http://purl.com/cosy#ObjectRole
+cosy:ObjectRole rdf:type owl:NamedIndividual ;
+                gufo:categorizes cosy:ConnectedObject .
+
+
+###  http://purl.com/cosy#ObjectType
+cosy:ObjectType rdf:type owl:NamedIndividual ;
+                gufo:categorizes cosy:ConnectedObject .
+
+
+###  http://purl.com/cosy#RelatorType
+cosy:RelatorType rdf:type owl:NamedIndividual ;
+                 gufo:categorizes cosy:ConnectionRelator .
+
+
+###  http://purl.com/cosy#Subsystem
+cosy:Subsystem rdf:type owl:NamedIndividual ,
+                        gufo:Mixin .
+
+
+###  http://purl.com/cosy#System
+cosy:System rdf:type owl:NamedIndividual ,
+                     gufo:Category .
+
+
+###  http://purl.com/cosy#SystemAspect
+cosy:SystemAspect rdf:type owl:NamedIndividual ,
+                           gufo:Category .
+
+
+###  http://purl.com/cosy#SystemBehavior
+cosy:SystemBehavior rdf:type owl:NamedIndividual ,
+                             gufo:EventType .
+
+
+###  http://purl.com/cosy#SystemCapability
+cosy:SystemCapability rdf:type owl:NamedIndividual ,
+                               gufo:Mixin .
+
+
+###  http://purl.com/cosy#SystemChange
+cosy:SystemChange rdf:type owl:NamedIndividual ,
+                           gufo:EventType .
+
+
+###  http://purl.com/cosy#SystemComposition
+cosy:SystemComposition rdf:type owl:NamedIndividual ,
+                                gufo:SituationType .
+
+
+###  http://purl.com/cosy#SystemConnectionRelator
+cosy:SystemConnectionRelator rdf:type owl:NamedIndividual ,
+                                      gufo:Category .
+
+
+###  http://purl.com/cosy#SystemDisposition
+cosy:SystemDisposition rdf:type owl:NamedIndividual ,
+                                gufo:Category .
+
+
+###  http://purl.com/cosy#SystemEmergentDisposition
+cosy:SystemEmergentDisposition rdf:type owl:NamedIndividual ,
+                                        gufo:Category .
+
+
+###  http://purl.com/cosy#SystemEnvironment
+cosy:SystemEnvironment rdf:type owl:NamedIndividual ,
+                                gufo:SituationType .
+
+
+###  http://purl.com/cosy#SystemEnvironmentEvent
+cosy:SystemEnvironmentEvent rdf:type owl:NamedIndividual ,
+                                     gufo:EventType .
+
+
+###  http://purl.com/cosy#SystemEvent
+cosy:SystemEvent rdf:type owl:NamedIndividual ,
+                          gufo:EventType .
+
+
+###  http://purl.com/cosy#SystemFlowItem
+cosy:SystemFlowItem rdf:type owl:NamedIndividual ,
+                             gufo:RoleMixin .
+
+
+###  http://purl.com/cosy#SystemInput
+cosy:SystemInput rdf:type owl:NamedIndividual ,
+                          gufo:Role .
+
+
+###  http://purl.com/cosy#SystemManifestationContext
+cosy:SystemManifestationContext rdf:type owl:NamedIndividual ,
+                                         gufo:SituationType .
+
+
+###  http://purl.com/cosy#SystemOutcome
+cosy:SystemOutcome rdf:type owl:NamedIndividual ,
+                            gufo:SituationType .
+
+
+###  http://purl.com/cosy#SystemOutput
+cosy:SystemOutput rdf:type owl:NamedIndividual ,
+                           gufo:Role .
+
+
+###  http://purl.com/cosy#SystemParticipation
+cosy:SystemParticipation rdf:type owl:NamedIndividual ,
+                                  gufo:EventType .
+
+
+###  http://purl.com/cosy#SystemQuality
+cosy:SystemQuality rdf:type owl:NamedIndividual ,
+                            gufo:Category .
+
+
+###  http://purl.com/cosy#SystemResultantDisposition
+cosy:SystemResultantDisposition rdf:type owl:NamedIndividual ,
+                                         gufo:Category .
+
+
+###  http://purl.com/cosy#SystemSituation
+cosy:SystemSituation rdf:type owl:NamedIndividual ,
+                              gufo:SituationType .
+
+
+###  http://purl.com/cosy#SystemStativeSituation
+cosy:SystemStativeSituation rdf:type owl:NamedIndividual ,
+                                     gufo:SituationType .
+
+
+###  http://purl.com/cosy#SystemStructure
+cosy:SystemStructure rdf:type owl:NamedIndividual ,
+                              gufo:SituationType .
+
+
+###  http://purl.com/cosy#SystemType
+cosy:SystemType rdf:type owl:NamedIndividual ;
+                gufo:categorizes cosy:System .
+
+
+###  http://purl.com/cosy#SystemVulnerability
+cosy:SystemVulnerability rdf:type owl:NamedIndividual ,
+                                  gufo:Mixin .
+
+
+###  http://purl.com/cosy#isConnectedWith
+cosy:isConnectedWith rdf:type owl:NamedIndividual ,
+                              gufo:MaterialRelationshipType .
+
+
+###  http://purl.com/cosy#isContrastedWith
+cosy:isContrastedWith rdf:type owl:NamedIndividual ,
+                               gufo:ComparativeRelationshipType .
+
+
+###  http://purl.com/cosy#isExternallyConnectedWith
+cosy:isExternallyConnectedWith rdf:type owl:NamedIndividual ,
+                                        gufo:MaterialRelationshipType ;
+                               gufo:isDerivedFrom cosy:ExternalConnectionRelator .
+
+
+###  http://purl.com/cosy#isExternallyConnectedWith_1
+cosy:isExternallyConnectedWith_1 rdf:type owl:NamedIndividual ,
+                                          gufo:MaterialRelationshipType ;
+                                 gufo:isDerivedFrom cosy:SystemConnectionRelator .
+
+
+###  http://purl.com/cosy#isExternallyContrastedWith
+cosy:isExternallyContrastedWith rdf:type owl:NamedIndividual ,
+                                         gufo:ComparativeRelationshipType .
+
+
+###  http://purl.com/cosy#isExternallyContrastedWith_1
+cosy:isExternallyContrastedWith_1 rdf:type owl:NamedIndividual ,
+                                           gufo:ComparativeRelationshipType .
+
+
+###  http://purl.com/cosy#isInternallyConnectedWith
+cosy:isInternallyConnectedWith rdf:type owl:NamedIndividual ,
+                                        gufo:MaterialRelationshipType ;
+                               gufo:isDerivedFrom cosy:InternalConnectionRelator .
+
+
+###  http://purl.com/cosy#isInternallyContrastedWith
+cosy:isInternallyContrastedWith rdf:type owl:NamedIndividual ,
+                                         gufo:ComparativeRelationshipType .
+
+
+###  http://purl.com/cosy#maintainsInteractionWith_1
+cosy:maintainsInteractionWith_1 rdf:type owl:NamedIndividual ,
+                                         gufo:MaterialRelationshipType .
+
+
+###  http://purl.com/cosy#maintainsInteractionWith_3
+cosy:maintainsInteractionWith_3 rdf:type owl:NamedIndividual ,
+                                         gufo:MaterialRelationshipType .
+
+
+###  http://purl.com/cosy#maintainsInteractionWith_4
+cosy:maintainsInteractionWith_4 rdf:type owl:NamedIndividual ,
+                                         gufo:MaterialRelationshipType .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+cosy:Component rdfs:label "Component"@en .
+
+
+cosy:ComponentAspect rdfs:label "ComponentAspect"@en .
+
+
+cosy:ComponentConnectionRelator rdfs:label "ComponentConnectionRelator"@en .
+
+
+cosy:ComponentDisposition rdfs:label "ComponentDisposition"@en .
+
+
+cosy:ComponentEvent rdfs:label "ComponentEvent"@en .
+
+
+cosy:ComponentParticipation rdfs:label "ComponentParticipation"@en .
+
+
+cosy:ComponentRole rdfs:label "ComponentRole"@en .
+
+
+cosy:ComponentRoleKind rdfs:label "ComponentRoleKind"@en .
+
+
+cosy:ComponentRoleMixin rdfs:label "ComponentRoleMixin"@en .
+
+
+cosy:ComponentType rdfs:label "ComponentType"@en .
+
+
+cosy:ConnectedObject rdfs:label "ConnectedObject"@en .
+
+
+cosy:ConnectionRelator rdfs:label "ConnectionRelator"@en .
+
+
+cosy:ConnectiveSituation rdfs:label "ConnectiveSituation"@en .
+
+
+cosy:ExternalComponentInteraction rdfs:label "ComponentExternalInteraction"@en .
+
+
+cosy:ExternalConnectionRelator rdfs:label "ExternalConnectionRelator"@en .
+
+
+cosy:ExternalEntity rdfs:label "ExternalEntity"@en .
+
+
+cosy:ExternalEntityDisposition rdfs:label "ExternalEntityDisposition"@en .
+
+
+cosy:ExternalEntityParticipationAtComponentLevel rdfs:label "ExternalEntityParticipationAtComponentLevel"@en .
+
+
+cosy:ExternalEntityParticipationAtSystemLevel rdfs:label "ExternalEntityParticipationAtSystemLevel"@en .
+
+
+cosy:ExternalEntityRole rdfs:label "ExternalEntityRole"@en .
+
+
+cosy:FlowItemDisposition rdfs:label "SystemFlowItemDisposition"@en .
+
+
+cosy:FlowItemRole rdfs:label "SystemFlowItemRole"@en .
+
+
+cosy:InternalComponentEvent rdfs:label "ComponentInternalEvent"@en .
+
+
+cosy:InternalComponentInteraction rdfs:label "ComponentInternalInteraction"@en .
+
+
+cosy:InternalConnectionRelator rdfs:label "InternalConnectionRelator"@en .
+
+
+cosy:InternalSystemEvent rdfs:label "SystemInternalEvent"@en .
+
+
+cosy:MomentType rdfs:label "AspectType"@en .
+
+
+cosy:ObjectRole rdfs:label "ObjectRole"@en .
+
+
+cosy:RelatorType rdfs:label "RelatorType"@en .
+
+
+cosy:Subsystem rdfs:label "Subsystem"@en .
+
+
+cosy:System rdfs:label "System"@en .
+
+
+cosy:SystemAspect rdfs:label "SystemAspect"@en .
+
+
+cosy:SystemBehavior rdfs:label "SystemBehavior"@en .
+
+
+cosy:SystemCapability rdfs:label "SystemCapability"@en .
+
+
+cosy:SystemChange rdfs:label "SystemChange"@en .
+
+
+cosy:SystemComposition rdfs:label "SystemCompositionSituation"@en .
+
+
+cosy:SystemConnectionRelator rdfs:label "SystemConnectionRelator"@en .
+
+
+cosy:SystemDisposition rdfs:label "SystemDisposition"@en .
+
+
+cosy:SystemEmergentDisposition rdfs:label "SystemEmergentDisposition"@en .
+
+
+cosy:SystemEnvironment rdfs:label "SystemEnvironmentSituation"@en .
+
+
+cosy:SystemEnvironmentEvent rdfs:label "SystemEnvironmentInteraction"@en .
+
+
+cosy:SystemEvent rdfs:label "SystemEvent"@en .
+
+
+cosy:SystemFlowItem rdfs:label "SystemFlowItem"@en .
+
+
+cosy:SystemInput rdfs:label "SystemInput"@en .
+
+
+cosy:SystemManifestationContext rdfs:label "SystemManifestationContext"@en .
+
+
+cosy:SystemOutcome rdfs:label "SystemOutcome"@en .
+
+
+cosy:SystemOutput rdfs:label "SystemOutput"@en .
+
+
+cosy:SystemParticipation rdfs:label "SystemParticipation"@en .
+
+
+cosy:SystemQuality rdfs:label "SystemQuality"@en .
+
+
+cosy:SystemResultantDisposition rdfs:label "SystemResultantDisposition"@en .
+
+
+cosy:SystemSituation rdfs:label "SystemSituation"@en .
+
+
+cosy:SystemStativeSituation rdfs:label "SystemStativeSituation"@en .
+
+
+cosy:SystemStructure rdfs:label "SystemStructureSituation"@en .
+
+
+cosy:SystemType rdfs:label "SystemType"@en .
+
+
+cosy:SystemVulnerability rdfs:label "SystemVulnerability"@en .
+
+
+cosy:isConnectedWith rdfs:label "isConnectedWith"@en .
+
+
+cosy:isContrastedWith rdfs:label "isContrastedWith"@en .
+
+
+cosy:isExternallyConnectedWith rdfs:label "isComponentExternallyConnectedWith"@en .
+
+
+cosy:isExternallyConnectedWith_1 rdfs:label "isSystemExternallyConnectedWith"@en .
+
+
+cosy:isExternallyContrastedWith rdfs:label "isExternallyContrastedWithAtSystemLevel"@en .
+
+
+cosy:isExternallyContrastedWith_1 rdfs:label "isExternallyContrastedWithAtComponentLevel"@en .
+
+
+cosy:isInternallyConnectedWith rdfs:label "isInternallyConnectedWith"@en .
+
+
+cosy:isInternallyContrastedWith rdfs:label "isInternallyContrastedWith"@en .
+
+
+cosy:maintainsInteractionWith_1 rdfs:label "componentMaintainsInteractionWithSystemFlowItem"@en .
+
+
+cosy:maintainsInteractionWith_3 rdfs:label "systemMaintainsInteractionWithSystemFlowItem"@en .
+
+
+cosy:maintainsInteractionWith_4 rdfs:label "externalEntityMaintainsInteractionWithSystemFlowItem"@en .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
