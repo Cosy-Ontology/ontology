@@ -284,27 +284,8 @@ cosy:standsIn_8 rdf:type owl:ObjectProperty ;
 
 ###  http://purl.com/cosy#Component
 cosy:Component rdf:type owl:Class ;
-               rdfs:subClassOf cosy:ConnectedObject ,
-                               [ rdf:type owl:Restriction ;
-                                 owl:onProperty [ owl:inverseOf gufo:inheresIn
-                                                ] ;
-                                 owl:someValuesFrom cosy:ComponentAspect
-                               ] ,
-                               [ rdf:type owl:Restriction ;
-                                 owl:onProperty [ owl:inverseOf gufo:inheresIn
-                                                ] ;
-                                 owl:someValuesFrom cosy:ComponentDisposition
-                               ] ,
-                               [ rdf:type owl:Restriction ;
-                                 owl:onProperty [ owl:inverseOf gufo:mediates
-                                                ] ;
-                                 owl:someValuesFrom cosy:ComponentConnectionRelator
-                               ] ,
-                               [ rdf:type owl:Restriction ;
-                                 owl:onProperty [ owl:inverseOf gufo:mediates
-                                                ] ;
-                                 owl:someValuesFrom cosy:InternalConnectionRelator
-                               ] .
+               rdfs:subClassOf cosy:ConnectedObject ;
+               owl:disjointWith cosy:ExternalEntity .
 
 
 ###  http://purl.com/cosy#ComponentAspect
@@ -312,7 +293,7 @@ cosy:ComponentAspect rdf:type owl:Class ;
                      rdfs:subClassOf gufo:Aspect ,
                                      [ rdf:type owl:Restriction ;
                                        owl:onProperty gufo:inheresIn ;
-                                       owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                        owl:onClass cosy:Component
                                      ] .
 
@@ -333,7 +314,7 @@ cosy:ComponentDisposition rdf:type owl:Class ;
                                           <http://purl.org/disc-o#Disposition> ,
                                           [ rdf:type owl:Restriction ;
                                             owl:onProperty gufo:inheresIn ;
-                                            owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                             owl:onClass cosy:Component
                                           ] .
 
@@ -341,11 +322,6 @@ cosy:ComponentDisposition rdf:type owl:Class ;
 ###  http://purl.com/cosy#ComponentEvent
 cosy:ComponentEvent rdf:type owl:Class ;
                     rdfs:subClassOf gufo:Event ,
-                                    [ rdf:type owl:Restriction ;
-                                      owl:onProperty [ owl:inverseOf gufo:inheresIn
-                                                     ] ;
-                                      owl:someValuesFrom cosy:ComponentAspect
-                                    ] ,
                                     [ rdf:type owl:Restriction ;
                                       owl:onProperty [ owl:inverseOf gufo:participatedIn
                                                      ] ;
@@ -368,12 +344,14 @@ cosy:ComponentRole rdf:type owl:Class ;
 
 ###  http://purl.com/cosy#ComponentRoleKind
 cosy:ComponentRoleKind rdf:type owl:Class ;
-                       rdfs:subClassOf cosy:ComponentRole .
+                       rdfs:subClassOf cosy:ComponentRole ,
+                                       gufo:Role .
 
 
 ###  http://purl.com/cosy#ComponentRoleMixin
 cosy:ComponentRoleMixin rdf:type owl:Class ;
-                        rdfs:subClassOf cosy:ComponentRole .
+                        rdfs:subClassOf cosy:ComponentRole ,
+                                        gufo:RoleMixin .
 
 
 ###  http://purl.com/cosy#ComponentType
@@ -427,22 +405,7 @@ cosy:ExternalConnectionRelator rdf:type owl:Class ;
 
 ###  http://purl.com/cosy#ExternalEntity
 cosy:ExternalEntity rdf:type owl:Class ;
-                    rdfs:subClassOf cosy:ConnectedObject ,
-                                    [ rdf:type owl:Restriction ;
-                                      owl:onProperty [ owl:inverseOf gufo:inheresIn
-                                                     ] ;
-                                      owl:someValuesFrom cosy:ExternalEntityDisposition
-                                    ] ,
-                                    [ rdf:type owl:Restriction ;
-                                      owl:onProperty [ owl:inverseOf gufo:mediates
-                                                     ] ;
-                                      owl:someValuesFrom cosy:ExternalConnectionRelator
-                                    ] ,
-                                    [ rdf:type owl:Restriction ;
-                                      owl:onProperty [ owl:inverseOf gufo:mediates
-                                                     ] ;
-                                      owl:someValuesFrom cosy:SystemConnectionRelator
-                                    ] .
+                    rdfs:subClassOf cosy:ConnectedObject .
 
 
 ###  http://purl.com/cosy#ExternalEntityDisposition
@@ -450,7 +413,7 @@ cosy:ExternalEntityDisposition rdf:type owl:Class ;
                                rdfs:subClassOf gufo:IntrinsicMode ,
                                                [ rdf:type owl:Restriction ;
                                                  owl:onProperty gufo:inheresIn ;
-                                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                                  owl:onClass cosy:ExternalEntity
                                                ] .
 
@@ -488,7 +451,7 @@ cosy:FlowItemDisposition rdf:type owl:Class ;
                                          gufo:IntrinsicMode ,
                                          [ rdf:type owl:Restriction ;
                                            owl:onProperty gufo:inheresIn ;
-                                           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                            owl:onClass cosy:SystemFlowItem
                                          ] .
 
@@ -543,44 +506,21 @@ cosy:RelatorType rdf:type owl:Class ;
 
 ###  http://purl.com/cosy#Subsystem
 cosy:Subsystem rdf:type owl:Class ;
-               rdfs:subClassOf cosy:Component ,
-                               cosy:System .
+               owl:equivalentClass [ owl:intersectionOf ( cosy:Component
+                                                          cosy:System
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] .
 
 
 ###  http://purl.com/cosy#System
 cosy:System rdf:type owl:Class ;
-            rdfs:subClassOf <http://example.com#CapableObject> ,
-                            cosy:ConnectedObject ,
+            rdfs:subClassOf cosy:ConnectedObject ,
+                            <http://purl.org/creon#CapableObject> ,
                             gufo:FunctionalComplex ,
                             [ rdf:type owl:Restriction ;
                               owl:onProperty gufo:participatedIn ;
                               owl:someValuesFrom cosy:SystemEvent
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty [ owl:inverseOf gufo:inheresIn
-                                             ] ;
-                              owl:someValuesFrom cosy:SystemAspect
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty [ owl:inverseOf gufo:inheresIn
-                                             ] ;
-                              owl:someValuesFrom cosy:SystemDisposition
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty [ owl:inverseOf gufo:mediates
-                                             ] ;
-                              owl:someValuesFrom cosy:SystemConnectionRelator
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty [ owl:inverseOf gufo:participatedIn
-                                             ] ;
-                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                              owl:onClass cosy:SystemChange
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty gufo:participatedIn ;
-                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                              owl:onClass cosy:SystemBehavior
                             ] .
 
 
@@ -589,7 +529,7 @@ cosy:SystemAspect rdf:type owl:Class ;
                   rdfs:subClassOf gufo:Aspect ,
                                   [ rdf:type owl:Restriction ;
                                     owl:onProperty gufo:inheresIn ;
-                                    owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                     owl:onClass cosy:System
                                   ] .
 
@@ -600,15 +540,15 @@ cosy:SystemBehavior rdf:type owl:Class ;
                                     [ rdf:type owl:Restriction ;
                                       owl:onProperty [ owl:inverseOf gufo:participatedIn
                                                      ] ;
-                                      owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                       owl:onClass cosy:System
                                     ] .
 
 
 ###  http://purl.com/cosy#SystemCapability
 cosy:SystemCapability rdf:type owl:Class ;
-                      rdfs:subClassOf <http://example.com#Capability> ,
-                                      cosy:SystemDisposition .
+                      rdfs:subClassOf cosy:SystemDisposition ,
+                                      <http://purl.org/creon#Capability> .
 
 
 ###  http://purl.com/cosy#SystemChange
@@ -645,10 +585,9 @@ cosy:SystemConnectionRelator rdf:type owl:Class ;
 cosy:SystemDisposition rdf:type owl:Class ;
                        rdfs:subClassOf cosy:SystemAspect ,
                                        <http://purl.org/disc-o#Disposition> ,
-                                       <http://purl.org/disc-o#ResultantDisposition> ,
                                        [ rdf:type owl:Restriction ;
                                          owl:onProperty gufo:inheresIn ;
-                                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                          owl:onClass cosy:System
                                        ] .
 
@@ -677,18 +616,6 @@ cosy:SystemEnvironmentEvent rdf:type owl:Class ;
                                               owl:onProperty [ owl:inverseOf gufo:participatedIn
                                                              ] ;
                                               owl:someValuesFrom cosy:SystemOutput
-                                            ] ,
-                                            [ rdf:type owl:Restriction ;
-                                              owl:onProperty [ owl:inverseOf gufo:wasCreatedIn
-                                                             ] ;
-                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                              owl:onClass cosy:SystemOutput
-                                            ] ,
-                                            [ rdf:type owl:Restriction ;
-                                              owl:onProperty [ owl:inverseOf gufo:wasTerminatedIn
-                                                             ] ;
-                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                              owl:onClass cosy:SystemInput
                                             ] .
 
 
@@ -696,7 +623,7 @@ cosy:SystemEnvironmentEvent rdf:type owl:Class ;
 cosy:SystemEvent rdf:type owl:Class ;
                  rdfs:subClassOf gufo:Event ,
                                  [ rdf:type owl:Restriction ;
-                                   owl:onProperty [ owl:inverseOf gufo:inheresIn
+                                   owl:onProperty [ owl:inverseOf gufo:manifestedIn
                                                   ] ;
                                    owl:someValuesFrom cosy:SystemAspect
                                  ] ,
@@ -735,11 +662,6 @@ cosy:SystemInput rdf:type owl:Class ;
                                  [ rdf:type owl:Restriction ;
                                    owl:onProperty gufo:participatedIn ;
                                    owl:someValuesFrom cosy:SystemEnvironmentEvent
-                                 ] ,
-                                 [ rdf:type owl:Restriction ;
-                                   owl:onProperty gufo:wasTerminatedIn ;
-                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                   owl:onClass cosy:SystemEnvironmentEvent
                                  ] .
 
 
@@ -768,11 +690,6 @@ cosy:SystemOutput rdf:type owl:Class ;
                                   [ rdf:type owl:Restriction ;
                                     owl:onProperty gufo:participatedIn ;
                                     owl:someValuesFrom cosy:SystemEnvironmentEvent
-                                  ] ,
-                                  [ rdf:type owl:Restriction ;
-                                    owl:onProperty gufo:wasCreatedIn ;
-                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                    owl:onClass cosy:SystemEnvironmentEvent
                                   ] .
 
 
@@ -832,10 +749,6 @@ cosy:SystemVulnerability rdf:type owl:Class ;
 #################################################################
 #    Individuals
 #################################################################
-
-###  http://example.com#ObjectType
-<http://example.com#ObjectType> gufo:categorizes cosy:ConnectedObject .
-
 
 ###  http://purl.com/cosy#Component
 cosy:Component rdf:type owl:NamedIndividual ,
@@ -1170,6 +1083,10 @@ cosy:maintainsInteractionWith_3 rdf:type owl:NamedIndividual ,
 ###  http://purl.com/cosy#maintainsInteractionWith_4
 cosy:maintainsInteractionWith_4 rdf:type owl:NamedIndividual ,
                                          gufo:MaterialRelationshipType .
+
+
+###  http://purl.org/creon#ObjectType
+<http://purl.org/creon#ObjectType> gufo:categorizes cosy:ConnectedObject .
 
 
 #################################################################
