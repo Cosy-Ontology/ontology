@@ -526,12 +526,7 @@ cosy:System rdf:type owl:Class ;
 
 ###  http://purl.com/cosy#SystemAspect
 cosy:SystemAspect rdf:type owl:Class ;
-                  rdfs:subClassOf gufo:Aspect ,
-                                  [ rdf:type owl:Restriction ;
-                                    owl:onProperty gufo:inheresIn ;
-                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                    owl:onClass cosy:System
-                                  ] .
+                  rdfs:subClassOf gufo:Aspect .
 
 
 ###  http://purl.com/cosy#SystemBehavior
