@@ -290,12 +290,7 @@ cosy:Component rdf:type owl:Class ;
 
 ###  http://purl.com/cosy#ComponentAspect
 cosy:ComponentAspect rdf:type owl:Class ;
-                     rdfs:subClassOf gufo:Aspect ,
-                                     [ rdf:type owl:Restriction ;
-                                       owl:onProperty gufo:inheresIn ;
-                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                       owl:onClass cosy:Component
-                                     ] .
+                     rdfs:subClassOf gufo:Aspect .
 
 
 ###  http://purl.com/cosy#ComponentConnectionRelator
@@ -526,7 +521,12 @@ cosy:System rdf:type owl:Class ;
 
 ###  http://purl.com/cosy#SystemAspect
 cosy:SystemAspect rdf:type owl:Class ;
-                  rdfs:subClassOf gufo:Aspect .
+                  rdfs:subClassOf gufo:Aspect,
+                                  [
+                                  rdf:type owl:Restriction ;
+                                      owl:onProperty <http://purl.org/disc-o#arisesFrom> ;
+                                      owl:allValuesFrom cosy:ComponentAspect
+                                  ] .
 
 
 ###  http://purl.com/cosy#SystemBehavior
@@ -904,7 +904,7 @@ cosy:System rdf:type owl:NamedIndividual ,
 
 ###  http://purl.com/cosy#SystemAspect
 cosy:SystemAspect rdf:type owl:NamedIndividual ,
-                           gufo:Category .
+                           gufo:Category.
 
 
 ###  http://purl.com/cosy#SystemBehavior
